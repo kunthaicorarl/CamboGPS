@@ -3,13 +3,17 @@ $datetoday = date("Y/m/d");
 ?>
 
 <h3><?= $title ?></h3><hr/>
-<form action="<?php echo base_url()."admin/province/add_edit"; ?>" method="post" enctype="multipart/form-data">
+<form action="<?php echo base_url()."admin/tourism/add_edit"; ?>" method="post" enctype="multipart/form-data">
 <input type="hidden" class="form-control" value="<?php echo isset($data['id'])?$data['id']:"";?>" id="id" name="id"/>
 <input type="hidden" class="form-control" value="9" id="user_id" name="user_id"/>
     <div class="form-group row">
-      <label for="inputTitle" class="col-sm-2 col-form-label">Postal Code</label>
+      <label for="inputTitle" class="col-sm-2 col-form-label">Provinces</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" value="<?php echo isset($data['postal_code'])?$data['postal_code']:"";?>" id="postal_code" name="postal_code" placeholder="Postal Code">
+       <select class="col-sm-2 col-form-label">
+          <option>Mustard</option>
+          <option>Ketchup</option>
+          <option>Relish</option>
+        </select>
       </div>
     </div>
     <div class="form-group row">
@@ -28,45 +32,32 @@ $datetoday = date("Y/m/d");
       <label for="inputTitle" class="col-sm-2 col-form-label">Thumbnail</label>
       <div class="col-sm-10">
         <!-- <button class="btn btn-success" ng-click="addImageModal()">Add Image</button> -->
-     <label for=”files”>Select multiple files: </label>
-<input id=”files” type=”file” multiple/>
-<output id=”result” />
-
+      <input type="file" accept="image/*" class="form-control" onchange="loadFile(event)" id="thumbnail"  name="thumbnail" multiple/>
+<div id="result">
+</div>
 <img id="output" width="320" heihgt="320" src="<?=base_url()?>assets/images/<?php echo isset($data['thumbnail'])?$data['thumbnail']:"";?>"/>
 <script>
-window.onload = function(){
-    //Check File API support
-    if(window.File && window.FileList && window.FileReader)
-    {
-        var filesInput = document.getElementById(“files”);
-        filesInput.addEventListener(“change”, function(event){
-            var files = event.target.files; //FileList object
-            var output = document.getElementById(“result”);
-            for(var i = 0; i< files.length; i++)
-            {
-                var file = files[i];
-                //Only pics
-                if(!file.type.match(‘image’))
-                    continue;
-                var picReader = new FileReader();
-                picReader.addEventListener(“load”,function(event){
-                    var picFile = event.target;
-                    var div = document.createElement(“div”);
-                    div.innerHTML = “<img class="thumbnail" src='"+ picFile.result +"'" +
-                    "title='" + picFile.name +"'/>";
-                    output.insertBefore(div,null);
-                });
-                //Read the image
-                picReader.readAsDataURL(file);
-            }
-        });
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    for(var i=0;i<event.target.files.length;i++){
+    	 var picFile = event.target;
+         var div = document.createElement("div");
+         div.innerHTML = “<img class='thumbnail' src='" + picFile.result + "'" +
+         "title='" + picFile.name + "'/>";
+         output.insertBefore(div,null);
     }
-    else
-    {
-        console.log(“Your browser does not support File API”);
-    }
-}
+   
+  };
 </script>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputTitle" class="col-sm-2 col-form-label">Location</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" value="<?php echo isset($data['latitude'])?$data['latitude']:"";?>" id="latitude" name="latitude" placeholder="Latitude">
+      </div>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" value="<?php echo isset($data['longitude'])?$data['longitude']:"";?>" id="longitude" name="longitude" placeholder="Longitude">
       </div>
     </div>
     <div class="form-group row">
@@ -79,6 +70,19 @@ window.onload = function(){
       <label for="inputDesc" class="col-sm-2 col-form-label">Description English</label>
       <div class="col-sm-10">
         <textarea class="form-control" id="description_english" name="description_english" rows="5" placeholder="Description English"><?php echo isset($data['description_english'])?$data['description_english']:"";?></textarea>
+      </div>
+    </div>
+    
+     <div class="form-group row">
+      <label for="inputDesc" class="col-sm-2 col-form-label">Address Khmer</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="address_khmer" name="address_khmer" rows="5" placeholder="Address Khmer"><?php echo isset($data['address_khmer'])?$data['address_khmer']:"";?></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputDesc" class="col-sm-2 col-form-label">Address English</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="address_english" name="address_english" rows="5" placeholder="Address English"><?php echo isset($data['address_english'])?$data['address_english']:"";?></textarea>
       </div>
     </div>
     <button type="submit" name="save" class="btn btn-info pull-right">Public</button>

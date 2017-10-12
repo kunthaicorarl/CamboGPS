@@ -94,6 +94,8 @@ class province extends CI_Controller{
           unset($data['fileOld']);
           unset($data['save']);
           $data['status']=1;
+//           print_r($data);
+//           die();
           $insert_id = $this->provinces_model->insertRow('provinces', $data);
           $this->session->set_flashdata('ms_true', 'Your data inserted Successfully..');
           redirect('admin/province/view');

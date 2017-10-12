@@ -8,6 +8,7 @@
           Menu for Admin
         </a>
         <a href="<?php echo base_url();?>admin/province" class="list-group-item list-group-item-action">Province</a>
+        <a href="<?php echo base_url();?>admin/tourism" class="list-group-item list-group-item-action">Tourism</a>
         <a href="<?php echo base_url();?>admin/link" class="list-group-item list-group-item-action">Link Download</a>
         <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
         <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
