@@ -43,8 +43,7 @@ class tourism extends CI_Controller{
 	{   $final_files_data=array();
 	    $this->load->library('upload');
 	    $number_of_files_uploaded = count($_FILES['thumbnail']['name']);
-	    // Faking upload calls to $_FILE
-	    for ($i = 0; $i < $number_of_files_uploaded; $i++) :
+	    for ($i = 0; $i < $number_of_files_uploaded; $i++) {
 	    $_FILES['thumbnail']['name']     = $_FILES['thumbnail']['name'][$i];
 	    $_FILES['thumbnail']['type']     = $_FILES['thumbnail']['type'][$i];
 	    $_FILES['thumbnail']['tmp_name'] = $_FILES['thumbnail']['tmp_name'][$i];
@@ -58,22 +57,19 @@ class tourism extends CI_Controller{
 	        'allowed_types' => 'jpg|jpeg|png|gif',
 	        'max_size'      => 3000,
 	        'overwrite'     => FALSE,
-	        
-	        /* real path to upload folder ALWAYS */
-	        'upload_path'
-	        =>base_url().'assets/images/'//$_SERVER['DOCUMENT_ROOT'] . '/path/to/upload/folder'
+	        'upload_path'=>base_url().'assets/images/'//$_SERVER['DOCUMENT_ROOT'] . '/path/to/upload/folder'
 	    );
 	    $this->upload->initialize($config);
-	    if ( ! $this->upload->do_upload()) :
+	    if ( ! $this->upload->do_upload()) {
 	    $error = array('error' => $this->upload->display_errors());
 	   // $this->load->view('upload_form', $error);
-	    else :
+	    }else {
 	    $final_files_data[] = $this->upload->data();
 	    // Continue processing the uploaded data
-	    return $this->upload->data();
-	    endif;
-	    endfor;
-	   
+	    
+	    }
+	    }
+	    return  $final_files_data;
 	}
     function upload() {
         $data=array();
